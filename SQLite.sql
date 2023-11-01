@@ -13,7 +13,7 @@ CREATE TABLE DISCIPLINA (
     nome VARCHAR2(100),
     FOREIGN KEY (id_aluno) REFERENCES ALUNO(id_aluno)
 );
-
+--------------------------------------------------------------------------------------------------------------------
 -- Criar tabela FUNCIONARIO
 CREATE TABLE FUNCIONARIO (
     id_funcionario NUMBER,
@@ -28,6 +28,20 @@ CREATE TABLE DEPTO (
     nome VARCHAR2(100),
     FOREIGN KEY (id_funcionario) REFERENCES FUNCIONARIO(id_funcionario)
 );
+CREATE SEQUENCE depto_seq START WITH 1;
+
+CREATE OR REPLACE TRIGGER depto_bir 
+BEFORE INSERT ON DEPTO 
+FOR EACH ROW
+
+BEGIN
+  SELECT depto_seq.NEXTVAL
+  INTO   :new.id_funcionario
+  FROM   dual;
+END;
+/
+
+--------------------------------------------------------------------------------------------------------------------
 
 -- Criar tabela PACIENTE
 CREATE TABLE PACIENTE (
@@ -43,6 +57,7 @@ CREATE TABLE DOENCA (
     nome VARCHAR2(100),
     FOREIGN KEY (id_paciente) REFERENCES PACIENTE(id_paciente)
 );
+--------------------------------------------------------------------------------------------------------------------
 
 -- Criar tabela TRATAMENTO
 CREATE TABLE TRATAMENTO (
@@ -58,6 +73,7 @@ CREATE TABLE PESSOA (
     nome VARCHAR2(100),
     PRIMARY KEY (id_pessoa)
 );
+--------------------------------------------------------------------------------------------------------------------
 
 -- Criar tabela PROFISSAO
 CREATE TABLE PROFISSAO (
