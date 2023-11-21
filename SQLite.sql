@@ -13,6 +13,12 @@ CREATE TABLE DISCIPLINA (
     nome VARCHAR2(100),
     FOREIGN KEY (id_aluno) REFERENCES ALUNO(id_aluno)
 );
+-- Inserir o aluno
+    INSERT INTO ALUNO (id_aluno, matricula, nome) VALUES (1, 157, 'Ervansuer')
+      RETURNING id_aluno INTO v_id_aluno;
+
+    -- Inserir a disciplina relacionada ao aluno
+    INSERT INTO DISCIPLINA (id_disciplina, id_aluno, nome) VALUES (1, 1, 'Matemática');
 --------------------------------------------------------------------------------------------------------------------
 -- Criar tabela FUNCIONARIO
 CREATE TABLE FUNCIONARIO (
